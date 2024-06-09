@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="dark">
   <head>
     <title>CousesApp</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -7,9 +7,10 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+    <%= hotwire_livereload_tags if Rails.env.development? %>
   </head>
-  <body class="dark">
-    <%= render 'layouts/navbar' %>
+  <body >
+    <%= render 'layouts/navbar/navbar' %>
     <%= yield %>
   </body>
 </html>
