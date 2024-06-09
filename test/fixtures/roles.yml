@@ -1,7 +1,13 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# test/fixtures/roles.yml
 
-one:
-  name: MyString
+admin:
+  id: 1
+  name: 'admin'
 
-two:
-  name: MyString
+creator:
+  id: 2
+  name: 'creator'
+
+consumer:
+  id: 3
+  name: 'consumer'

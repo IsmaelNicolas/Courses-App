@@ -2,10 +2,12 @@
 <h1>Courses</h1>
 <div id="courses">
   <% @courses.each do |course| %>
-    <%= render course %>
-    <p>
-      <%= link_to "Show this course", course ,class:"text-blue-600"%>
-    </p>
+    <div class="course">
+      <%= render course %>
+      <p>
+        <%= link_to "Ver este curso", course ,class:"text-blue-600"%>
+      </p>
+    </div>
   <% end %>
 </div>
-<%= link_to "New course", new_course_path %>
+<%= link_to "Nuevo curso", new_course_path %>

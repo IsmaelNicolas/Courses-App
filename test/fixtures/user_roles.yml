@@ -1,9 +1,13 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# test/fixtures/user_roles.yml
 
-one:
-  user: one
-  role: one
+admin_user_role:
+  user_id: 1
+  role_id: 1
 
-two:
-  user: two
-  role: two
+creator_user_role:
+  user_id: 2
+  role_id: 2
+
+consumer_user_role:
+  user_id: 3
+  role_id: 3
