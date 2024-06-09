@@ -22,6 +22,14 @@ class CoursesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test 'create a new course' do
+    post courses_path, params: { course: { title: 'New Course', description: 'This is a new course' } }
+    assert_redirected_to courses_path
+  end
+  test 'create a new course with empty values' do
+    post courses_path, params: { course: { title: '', description: '' } }
+    assert_response :unprocessable_entity
+  end
   # setup do
   #   @course = courses(:one)
   # end

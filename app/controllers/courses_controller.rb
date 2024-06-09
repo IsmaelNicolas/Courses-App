@@ -23,11 +23,9 @@ class CoursesController < ApplicationController
 
     respond_to do |format|
       if @course.save
-        format.html { redirect_to course_url(@course), notice: 'Course was successfully created.' }
-        format.json { render :show, status: :created, location: @course }
+        format.html { redirect_to courses_path, notice: 'Curso creado con éxito' }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @course.errors, status: :unprocessable_entity }
       end
     end
   end
