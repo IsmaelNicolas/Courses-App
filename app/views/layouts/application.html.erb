@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="dark">
+<html class="">
   <head>
     <title>CousesApp</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -10,6 +10,8 @@
     <%= hotwire_livereload_tags if Rails.env.development? %>
   </head>
   <body >
+    <p class="bg-green-300"><%= notice %></p>
+    <p class="bg-red-300"><%= alert %></p>
     <%= render 'layouts/navbar/navbar' %>
     <%= yield %>
   </body>
