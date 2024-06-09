@@ -14,6 +14,14 @@ class CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select '.description', 'This is a course to learn Ruby'
   end
 
+  test 'render the new course form' do
+    get new_course_path
+    assert_response :success
+    assert_select 'form' do
+      assert_select 'input[type=submit]', 1
+    end
+  end
+
   # setup do
   #   @course = courses(:one)
   # end
