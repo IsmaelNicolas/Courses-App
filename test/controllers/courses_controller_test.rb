@@ -25,11 +25,32 @@ class CoursesControllerTest < ActionDispatch::IntegrationTest
   test 'create a new course' do
     post courses_path, params: { course: { title: 'New Course', description: 'This is a new course' } }
     assert_redirected_to courses_path
+    assert_equal 'Curso creado con éxito', flash[:notice]
   end
   test 'create a new course with empty values' do
     post courses_path, params: { course: { title: '', description: '' } }
     assert_response :unprocessable_entity
   end
+
+  test 'render the edit course form' do
+    get edit_course_path(courses(:course1))
+    assert_response :success
+    assert_select 'form'
+  end
+
+  test 'update course' do
+    patch course_path(courses(:course1)),
+          params: { course: { title: 'Learnig ruby on rails' } }
+    assert_redirected_to courses_path
+    assert_equal 'Curso actualizado con éxito', flash[:notice]
+  end
+
+  test 'delete couse' do
+    delete course_path(courses(:course1))
+    assert_redirected_to courses_path
+    assert_equal 'Curso eliminado con éxito', flash[:notice]
+  end
+
   # setup do
   #   @course = courses(:one)
   # end
