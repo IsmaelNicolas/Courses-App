@@ -8,7 +8,7 @@ class CoursesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'render a detailed course' do
-    get courses_path(courses(:course1))
+    get course_path(courses(:course1))
     assert_response :success
     assert_select '.title', 'Learnig Ruby'
     assert_select '.description', 'This is a course to learn Ruby'
