@@ -3,7 +3,9 @@
 course1:
   title: Learnig Ruby
   description: This is a course to learn Ruby
+  status: 0
 
 course2:
   title: learnig Ruby on Rails
   description: MyString
+  status: 0

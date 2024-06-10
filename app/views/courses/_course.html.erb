@@ -3,5 +3,22 @@
   <div class="flex flex-col justify-between p-4 leading-normal">
     <h1 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white title"> <%= course.title %></h1>
     <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 description"><%= course.description %></p>
+    <% klass = "" %>
+    <% status = "" %>
+    <% case course.status.to_sym %>
+    <% when :construction %>
+      <% klass = "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300" %>
+      <% status = "En construcción" %>
+    <% when :active %>
+      <% klass = "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300" %>
+      <% status = "Activo" %>
+    <% when :inactive %>
+      <% klass = "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300" %>
+      <% status = "Inactivo" %>
+    <% else %>
+      <% klass = "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300" %>
+      <% status = "----" %>
+    <% end %>
+    <span class="<%= klass %> text-xs font-medium me-2 px-2.5 py-0.5 rounded-full w-fit"> <%= status %></span>
   </div>
 <% end %>

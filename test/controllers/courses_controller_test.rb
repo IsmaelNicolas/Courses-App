@@ -23,10 +23,12 @@ class CoursesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'create a new course' do
-    post courses_path, params: { course: { title: 'New Course', description: 'This is a new course' } }
+    post courses_path,
+         params: { course: { title: 'New Course', description: 'This is a new course', status: 0 } }
     assert_redirected_to courses_path
     assert_equal 'Curso creado con éxito', flash[:notice]
   end
+
   test 'create a new course with empty values' do
     post courses_path, params: { course: { title: '', description: '' } }
     assert_response :unprocessable_entity

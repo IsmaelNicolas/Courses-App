@@ -25,6 +25,7 @@ class CoursesController < ApplicationController
       if @course.save
         format.html { redirect_to courses_path, notice: 'Curso creado con éxito' }
       else
+        Rails.logger.info @course.errors.full_messages
         format.html { render :new, status: :unprocessable_entity }
       end
     end
@@ -59,6 +60,6 @@ class CoursesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def course_params
-    params.require(:course).permit(:title, :description, :image)
+    params.require(:course).permit(:title, :description, :image, :status)
   end
 end
