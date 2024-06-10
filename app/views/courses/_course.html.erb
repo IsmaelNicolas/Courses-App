@@ -1,24 +1,31 @@
-<%= link_to course, id: dom_id(course), class: 'course flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700' do %>
-  <%= image_tag course.image, class: "object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg", alt: 'image' if course.image.attached? %>
+<%= link_to course, id: dom_id(course), class: 'course px-4 flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700' do %>
+  <%= image_tag course.image, class: "object-scale-down w-full rounded-t-lg h-full md:h-auto md:w-48 md:rounded-none md:rounded-s-lg", alt: 'image' if course.image.attached? %>
   <div class="flex flex-col justify-between p-4 leading-normal">
     <h1 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white title"> <%= course.title %></h1>
     <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 description"><%= course.description %></p>
     <% klass = "" %>
+    <% point = "" %>
     <% status = "" %>
     <% case course.status.to_sym %>
     <% when :construction %>
       <% klass = "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300" %>
+      <% point = "bg-yellow-500" %>
       <% status = "En construcción" %>
     <% when :active %>
       <% klass = "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300" %>
+      <% point = "bg-green-500" %>
       <% status = "Activo" %>
     <% when :inactive %>
       <% klass = "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300" %>
+      <% point = "bg-red-500" %>
       <% status = "Inactivo" %>
     <% else %>
       <% klass = "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300" %>
+      <% point = "" %>
       <% status = "----" %>
     <% end %>
-    <span class="<%= klass %> text-xs font-medium me-2 px-2.5 py-0.5 rounded-full w-fit"> <%= status %></span>
+    <span class="<%= klass %> inline-flex items-center text-xs font-medium px-2.5 py-0.5 rounded-full w-fit">
+      <span class="<%= point %> w-2 h-2 me-1  rounded-full"></span>
+      <%= status %></span>
   </div>
 <% end %>

@@ -1,5 +1,5 @@
 <h1 class="text-5xl font-extrabold dark:text-white">Courses</h1>
 <%= link_to "Nuevo curso", new_course_path, class:"font-medium text-blue-600 dark:text-blue-500 hover:underline" %>
-<div id="courses">
+<div id="courses" class=" grid grid-cols-2 md:grid-cols-3 gap-4">
   <%= render partial: 'course',collection: @courses %>
 </div>
