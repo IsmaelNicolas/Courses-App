@@ -1,9 +1,5 @@
 <h1 class="text-5xl font-extrabold dark:text-white">Courses</h1>
 <%= link_to "Nuevo curso", new_course_path, class:"font-medium text-blue-600 dark:text-blue-500 hover:underline" %>
 <div id="courses">
-  <% @courses.each do |course| %>
-    <div class="course my-2">
-      <%= render course %>
-    </div>
-  <% end %>
+  <%= render partial: 'course',collection: @courses %>
 </div>

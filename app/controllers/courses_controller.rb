@@ -3,7 +3,7 @@ class CoursesController < ApplicationController
 
   # GET /courses or /courses.json
   def index
-    @courses = Course.all
+    @courses = Course.all.with_attached_image
   end
 
   # GET /courses/1 or /courses/1.json
