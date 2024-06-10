@@ -24,7 +24,7 @@ class CoursesControllerTest < ActionDispatch::IntegrationTest
 
   test 'create a new course' do
     post courses_path,
-         params: { course: { title: 'New Course', description: 'This is a new course', status: 0 } }
+         params: { course: { title: 'New Course', description: 'This is a new course' } }
     assert_redirected_to courses_path
     assert_equal 'Curso creado con éxito', flash[:notice]
   end
