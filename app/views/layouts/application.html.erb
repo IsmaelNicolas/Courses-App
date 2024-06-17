@@ -10,9 +10,10 @@
     <%= hotwire_livereload_tags if Rails.env.development? %>
   </head>
   <body >
-    <p class="bg-green-300"><%= notice %></p>
-    <p class="bg-red-300"><%= alert %></p>
+    <%= render 'shared/flash' %>
     <%= render 'layouts/navbar/navbar' %>
-    <%= yield %>
+    <div class="mx-2 md:mx-16">
+      <%= yield %>
+    </div>
   </body>
 </html>

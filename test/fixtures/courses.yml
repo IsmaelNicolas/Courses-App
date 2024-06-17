@@ -1,9 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: MyString
-  description: MyString
+course1:
+  title: Learnig Ruby
+  description: This is a course to learn Ruby
+  status: 0
 
-two:
-  title: MyString
+course2:
+  title: learnig Ruby on Rails
   description: MyString
+  status: 0

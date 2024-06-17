@@ -3,7 +3,7 @@ class CoursesController < ApplicationController
 
   # GET /courses or /courses.json
   def index
-    @courses = Course.all
+    @courses = Course.all.with_attached_image
   end
 
   # GET /courses/1 or /courses/1.json
@@ -23,11 +23,10 @@ class CoursesController < ApplicationController
 
     respond_to do |format|
       if @course.save
-        format.html { redirect_to course_url(@course), notice: 'Course was successfully created.' }
-        format.json { render :show, status: :created, location: @course }
+        format.html { redirect_to courses_path, notice: 'Curso creado con éxito' }
       else
+        Rails.logger.info @course.errors.full_messages
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @course.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -36,11 +35,9 @@ class CoursesController < ApplicationController
   def update
     respond_to do |format|
       if @course.update(course_params)
-        format.html { redirect_to course_url(@course), notice: 'Course was successfully updated.' }
-        format.json { render :show, status: :ok, location: @course }
+        format.html { redirect_to courses_path, notice: 'Curso actualizado con éxito' }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @course.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -50,8 +47,7 @@ class CoursesController < ApplicationController
     @course.destroy!
 
     respond_to do |format|
-      format.html { redirect_to courses_url, notice: 'Course was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html { redirect_to courses_url, notice: 'Curso eliminado con éxito' }
     end
   end
 
@@ -64,6 +60,6 @@ class CoursesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def course_params
-    params.require(:course).permit(:title, :description)
+    params.require(:course).permit(:title, :description, :image, :status)
   end
 end
