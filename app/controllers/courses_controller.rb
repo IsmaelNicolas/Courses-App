@@ -3,7 +3,13 @@ class CoursesController < ApplicationController
 
   # GET /courses or /courses.json
   def index
-    @courses = Course.all.with_attached_image
+    if Current.user.nil? || Current.user.consumer? || Current.user.admin?
+      @courses = Course.all.with_attached_image
+    elsif Current.user.creator?
+      @courses = Current.user.courses.with_attached_image
+    else
+      @courses = Course.none
+    end
   end
 
   # GET /courses/1 or /courses/1.json
