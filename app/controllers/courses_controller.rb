@@ -61,10 +61,21 @@ class CoursesController < ApplicationController
 
   def enroll
     if Current.user.consumer? && !@course.consumer_enrolled?(Current.user)
-      @course.enrollments.create(user: Current.user)
-      redirect_to courses_path, notice: 'Inscripción realizada con éxito.'
+      if @course.active?
+        creator_courses = Course.where(user_id: @course.user_id)
+        enrolled_courses_by_creator = creator_courses.joins(:enrollments).where(enrollments: { user_id: Current.user.id })
+
+        if enrolled_courses_by_creator.exists?
+          redirect_to courses_path, alert: 'No se puede acceder a más de un solo curso por creador.'
+        else
+          @course.enrollments.create(user: Current.user)
+          redirect_to courses_path, notice: 'Inscripción realizada con éxito.'
+        end
+      else
+        redirect_to courses_path, alert: 'Solo puedes inscribirte en cursos activos.'
+      end
     else
-      redirect_to courses_path, alert: 'No se pudo realizar la inscripción.'
+      redirect_to courses_path, alert: 'No se puede acceder a más de un solo curso por creador.'
     end
   end
 
