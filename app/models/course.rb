@@ -9,6 +9,12 @@ class Course < ApplicationRecord
 
   before_validation :set_default_user, on: :create
 
+  # scope :active_courses, -> { where(status: :active) }
+
+  def change_status(new_status)
+    update(status: new_status)
+  end
+
   private
 
   def set_default_user

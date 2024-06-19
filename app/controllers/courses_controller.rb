@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: %i[show edit update destroy]
+  before_action :authorize_creator_or_admin!, only: %i[edit update destroy]
 
   # GET /courses or /courses.json
   def index
@@ -67,5 +68,11 @@ class CoursesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def course_params
     params.require(:course).permit(:title, :description, :image, :status)
+  end
+
+  def authorize_creator_or_admin!
+    unless Current.user.admin? || (Current.user.creator? && @course.user == Current.user)
+      redirect_to courses_path, alert: 'No tienes permiso para realizar esta acción'
+    end
   end
 end

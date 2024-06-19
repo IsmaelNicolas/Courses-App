@@ -22,6 +22,10 @@
     <%= form.file_field :image %>
   </div>
   <div>
+    <%= form.label :status, "Estado del curso", style: "display: block" %>
+    <%= form.select :status, Course.statuses.keys.map { |status| [status.capitalize, status] }, prompt: "Selecciona el estado del curso" %>
+  </div>
+  <div>
     <%= form.submit %>
   </div>
 <% end %>
