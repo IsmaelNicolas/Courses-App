@@ -1,6 +1,7 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: %i[show edit update destroy]
+  before_action :set_course, only: %i[show edit update destroy enroll]
   before_action :authorize_creator_or_admin!, only: %i[edit update destroy]
+  before_action :validate_active_course_limit, only: %i[update]
 
   # GET /courses or /courses.json
   def index
@@ -58,6 +59,15 @@ class CoursesController < ApplicationController
     end
   end
 
+  def enroll
+    if Current.user.consumer? && !@course.consumer_enrolled?(Current.user)
+      @course.enrollments.create(user: Current.user)
+      redirect_to courses_path, notice: 'Inscripción realizada con éxito.'
+    else
+      redirect_to courses_path, alert: 'No se pudo realizar la inscripción.'
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -65,7 +75,6 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def course_params
     params.require(:course).permit(:title, :description, :image, :status)
   end
@@ -73,6 +82,12 @@ class CoursesController < ApplicationController
   def authorize_creator_or_admin!
     unless Current.user.admin? || (Current.user.creator? && @course.user == Current.user)
       redirect_to courses_path, alert: 'No tienes permiso para realizar esta acción'
+    end
+  end
+
+  def validate_active_course_limit
+    if course_params[:status] == 'active' && Current.user.creator? && Current.user.courses.active.count >= 2 && @course.status != 'active'
+      redirect_to edit_course_path(@course), alert: 'No puedes tener más de dos cursos activos.'
     end
   end
 end

@@ -8,6 +8,9 @@ class User < ApplicationRecord
   has_many :roles, through: :user_roles
   has_many :courses, dependent: :destroy
 
+  has_many :enrollments
+  has_many :enrolled_courses, through: :enrollments, source: :course
+
   def admin?
     roles.exists?(name: 'admin')
   end
@@ -18,5 +21,9 @@ class User < ApplicationRecord
 
   def consumer?
     roles.exists?(name: 'consumer')
+  end
+
+  def enrolled_in_creator_courses?(creator)
+    enrolled_courses.any? { |course| course.user == creator }
   end
 end

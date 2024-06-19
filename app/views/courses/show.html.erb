@@ -1,8 +1,9 @@
 <%= render @course %>
 <div>
-  <%= link_to "Back to courses", courses_path %> | 
-  <% if Current.user && (Current.user.admin? || (Current.user.creator? && @course.user == Current.user)) %>
-    <%= link_to "Edit this course", edit_course_path(@course) %> 
-    <%= button_to "Destroy this course", @course, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <%= link_to "Regresar a los cursos", courses_path %> |
+
+  <% if Current.user.present? && (Current.user.admin? || (Current.user.creator? && @course.user == Current.user)) %>
+    <%= link_to "Editar este Curso", edit_course_path(@course) %>
+    <%= button_to "Eliminar este curso", @course, method: :delete, data: { confirm: 'Estas seguro de eliminar este Curso?' } %>
   <% end %>
 </div>

@@ -42,7 +42,7 @@ class CoursesControllerTest < ActionDispatch::IntegrationTest
 
   test 'update course' do
     patch course_path(courses(:course1)),
-          params: { course: { title: 'Learnig ruby on rails' } }
+          params: { course: { title: 'Learning ruby on rails' } }
     assert_redirected_to courses_path
     assert_equal 'Curso actualizado con éxito', flash[:notice]
   end
