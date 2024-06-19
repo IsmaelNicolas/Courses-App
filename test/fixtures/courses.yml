@@ -1,11 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 course1:
-  title: Learnig Ruby
+  title: Learning Ruby
   description: This is a course to learn Ruby
   status: 0
+  user_id: 1
 
 course2:
-  title: learnig Ruby on Rails
-  description: MyString
+  title: Learning Rails 7
+  description: Rails 7 full course
   status: 0
+  user_id: 2
